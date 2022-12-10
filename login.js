@@ -26,4 +26,5 @@ async function signIn() {
 };
 
 const job = new CronJob(WEEKDAYS, signIn, null, false, "Asia/Kolkata");
-job.start();
+
+module.exports = job;
