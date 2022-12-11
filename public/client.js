@@ -1,8 +1,16 @@
 const publicVapidKey = 'BEz1dV26PUhLPK49t4Zfw6yOHK2QEmQfm1CSnIGhloFg_N9xT_5f8JiFsDxwPId8l-fQsopOIKsUfcZdfaz4fpI';
+const button = document.getElementById('subscribe');
 
-if('serviceWorker' in navigator){
-  send().catch(err => console.error(err));
-}
+button.disabled = Notification.permission === 'granted';
+button.addEventListener('click', async () => {
+  const res = await Notification.requestPermission();
+  console.log(res);
+  if(res === 'granted' && 'serviceWorker' in navigator){
+    button.disabled = res === 'granted';
+    send().catch(err => console.error(err));
+  }
+});
+
 
 async function send(){
   const register = await navigator.serviceWorker.register('./service.js', {
