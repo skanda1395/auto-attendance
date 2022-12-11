@@ -10,7 +10,7 @@ require('dotenv').config();
 let subscription;
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "client")));
+app.use(express.static('public'))
 
 webpush.setVapidDetails('mailto:skanda1395@gmail.com', process.env.PUBLIC_VAPID_KEY, process.env.PRIVATE_VAPID_KEY);
 
