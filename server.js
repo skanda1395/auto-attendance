@@ -15,16 +15,6 @@ app.use(express.static(path.join(__dirname, "public")));
 webpush.setVapidDetails('mailto:skanda1395@gmail.com', process.env.PUBLIC_VAPID_KEY, process.env.PRIVATE_VAPID_KEY);
 
 
-//subscribe route
-app.post('/subscribe', (req, res)=>{
-  subscription = req.body;
-  console.log(subscription);
-  res.status(201).json({})
-  const payload = JSON.stringify({title: 'Subscribed!' });
-
-  webpush.sendNotification(subscription, payload).catch(err=> console.error(err));
-});
-
 app.get("/", (req, res) => {
   res.sendFile(process.cwd() + '/index.html');
 });
@@ -35,6 +25,16 @@ app.get("/client.js", (req, res) => {
 
 app.get("/service.js", (req, res) => {
   res.sendFile(process.cwd() + '/service.js');
+});
+
+//subscribe route
+app.post('/subscribe', (req, res)=>{
+  subscription = req.body;
+  console.log(subscription);
+  res.status(201).json({})
+  const payload = JSON.stringify({title: 'Subscribed!' });
+
+  webpush.sendNotification(subscription, payload).catch(err=> console.error(err));
 });
 
 function test() {
