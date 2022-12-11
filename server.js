@@ -25,6 +25,18 @@ app.post('/subscribe', (req, res)=>{
   webpush.sendNotification(subscription, payload).catch(err=> console.error(err));
 });
 
+app.get("/", (req, res) => {
+  res.sendFile(process.cwd() + '/index.html');
+});
+
+app.get("/client.js", (req, res) => {
+  res.sendFile(process.cwd() + '/client.js');
+});
+
+app.get("/service.js", (req, res) => {
+  res.sendFile(process.cwd() + '/service.js');
+});
+
 function test() {
   const payload = JSON.stringify({title: '1 min notification' });
   webpush.sendNotification(subscription, payload).catch(err=> console.error(err));
